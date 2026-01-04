@@ -2,6 +2,15 @@ package com.healthydrinks.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val PrimaryGreen = Color(0xFF4CAF50)
+val SecondaryGreen = Color(0xFF81C784)
+val LightGreen = Color(0xFFE8F5E9)
+val YellowBanner = Color(0xFFFFD54F)
+val DarkGreen = Color(0xFF2E7D32)
+val TextBrown = Color(0xFF795548)
+val HeaderYellow = Color(0xFFFFEB3B)
+val LightGrey = Color(0xFFF5F5F5)
+
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)
