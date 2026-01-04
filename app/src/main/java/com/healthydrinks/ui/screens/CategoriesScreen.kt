@@ -1,12 +1,14 @@
 package com.healthydrinks.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,6 +23,9 @@ import com.healthydrinks.ui.theme.PrimaryGreen
 
 @Composable
 fun CategoriesScreen() {
+    var selectedCategory by remember { mutableStateOf("ALL JUICES") }
+    val categories = listOf("ALL JUICES", "COCONUT", "SUGARCANE")
+
     Column(modifier = Modifier.fillMaxSize().background(Color.White)) {
         HeaderAndSearchSection(bgColor = HeaderYellow)
         
@@ -31,9 +36,14 @@ fun CategoriesScreen() {
                 .clip(RoundedCornerShape(25.dp))
                 .background(Color(0xFFE0E0E0))
         ) {
-            CategoryTab("ALL JUICES", isSelected = true, modifier = Modifier.weight(1f))
-            CategoryTab("COCONUT", isSelected = false, modifier = Modifier.weight(1f))
-            CategoryTab("SUGARCANE", isSelected = false, modifier = Modifier.weight(1f))
+            categories.forEach { category ->
+                CategoryTab(
+                    text = category,
+                    isSelected = selectedCategory == category,
+                    onClick = { selectedCategory = category },
+                    modifier = Modifier.weight(1f)
+                )
+            }
         }
 
         LazyVerticalGrid(
@@ -55,11 +65,21 @@ fun CategoriesScreen() {
 }
 
 @Composable
-fun CategoryTab(text: String, isSelected: Boolean, modifier: Modifier = Modifier) {
+fun CategoryTab(
+    text: String,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(25.dp))
             .background(if (isSelected) PrimaryGreen else Color.Transparent)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null, // Removes ripple for cleaner tab switching feel
+                onClick = onClick
+            )
             .padding(vertical = 12.dp),
         contentAlignment = Alignment.Center
     ) {
