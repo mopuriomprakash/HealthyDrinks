@@ -34,22 +34,11 @@ fun SplashScreen(navController: NavHostController) {
             .background(PrimaryGreen),
         contentAlignment = Alignment.Center
     ) {
-        // Centered White Circle with Outer Ring
-        Box(
+        Image(
+            painter = painterResource(id = R.drawable.app_logo),
+            contentDescription = "App Logo",
             modifier = Modifier
-                .size(240.dp)
-                .border(2.dp, Color.White, CircleShape)
-                .padding(8.dp)
-                .clip(CircleShape)
-                .background(Color.White),
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.app_logo),
-                contentDescription = "App Logo",
-                modifier = Modifier
-                    .size(180.dp) // Adjusted to fit nicely inside the circle
-            )
-        }
+                .size(180.dp)
+        )
     }
 }
